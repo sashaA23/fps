@@ -1,0 +1,2617 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Сертификационный экзамен — квалифицированный инвестор</title>
+
+  <style>
+    /* =========================================================
+       БАЗОВЫЕ НАСТРОЙКИ
+       ========================================================= */
+
+    :root {
+      --red: #f0222d;
+      --red-dark: #c9101a;
+      --red-light: #fff0f1;
+      --red-soft: #ffdfe1;
+
+      --black: #101013;
+      --black-2: #17171b;
+
+      --text: #151519;
+
+      /* Более контрастный текст на светлом фоне */
+      --gray: #47474f;
+      --gray-soft: #62626b;
+
+      --white: #ffffff;
+      --light: #f5f5f7;
+
+      --line: #e2e2e6;
+
+      /*
+        Основной и вспомогательный текст на тёмном фоне.
+        Это не чистый белый, поэтому иерархия с заголовками
+        сохраняется, но текст больше не выглядит тусклым.
+      */
+      --dark-text: #eeeef2;
+      --dark-text-soft: #d7d7de;
+      --dark-text-muted: #bdbdc7;
+
+      --shadow-sm: 0 12px 35px rgba(16, 16, 19, 0.06);
+      --shadow-md: 0 24px 70px rgba(16, 16, 19, 0.10);
+      --shadow-lg: 0 45px 120px rgba(16, 16, 19, 0.16);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 30px;
+    }
+
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+
+      color: var(--text);
+      background: var(--white);
+
+      font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body,
+    button,
+    input {
+      font: inherit;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    summary,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    section {
+      position: relative;
+      padding: 21px 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 150px;
+    }
+
+    .section-light {
+      background: var(--light);
+    }
+
+    .section-heading {
+      max-width: 860px;
+      margin-bottom: 42px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 850;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    h1 {
+      font-size: clamp(42px, 5.2vw, 70px);
+    }
+
+    h2 {
+      font-size: clamp(34px, 4.2vw, 54px);
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    .accent {
+      color: var(--red);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-bottom: 18px;
+
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      border-radius: 20px;
+      background: currentColor;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin-top: 18px;
+
+      color: var(--gray);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 0.65s ease,
+        transform 0.65s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+
+    /* =========================================================
+       КНОПКИ
+       ========================================================= */
+
+    .button {
+      display: inline-flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+
+      padding: 16px 28px;
+
+      border: 0;
+      border-radius: 12px;
+
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+
+      cursor: pointer;
+
+      transition:
+        color 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        transform 0.22s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .button:focus-visible,
+    summary:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(240, 34, 45, 0.28);
+      outline-offset: 4px;
+    }
+
+    .button--red {
+      color: var(--white);
+      background: var(--red);
+      box-shadow: 0 18px 40px rgba(240, 34, 45, 0.25);
+    }
+
+    .button--red:hover {
+      background: var(--red-dark);
+      box-shadow: 0 22px 48px rgba(240, 34, 45, 0.34);
+    }
+
+    .button--ghost-white {
+      color: var(--white);
+      border: 2px solid rgba(255, 255, 255, 0.78);
+      background: transparent;
+    }
+
+    .button--ghost-white:hover {
+      color: var(--black);
+      background: var(--white);
+    }
+
+    .button__arrow {
+      font-size: 18px;
+      transition: transform 0.22s ease;
+    }
+
+    .button:hover .button__arrow {
+      transform: translateX(5px);
+    }
+
+
+    /* =========================================================
+       ВСЁ ОБ ЭКЗАМЕНЕ — ТЁМНЫЕ ПЛАШКИ
+       ========================================================= */
+
+    .exam-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .exam-chip {
+      position: relative;
+
+      flex: 1 1 0;
+      min-width: 185px;
+      min-height: 104px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 20px 26px;
+
+      overflow: hidden;
+
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+
+      color: var(--white);
+      background:
+        radial-gradient(
+          180px 90px at 18% -15%,
+          rgba(255, 255, 255, 0.10),
+          transparent 70%
+        ),
+        radial-gradient(
+          200px 140px at 100% 115%,
+          rgba(240, 34, 45, 0.28),
+          transparent 65%
+        ),
+        linear-gradient(160deg, #26262c 0%, #141418 55%, #0e0e11 100%);
+
+      box-shadow:
+        0 16px 34px rgba(16, 16, 19, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .exam-chip::before {
+      content: "";
+
+      position: absolute;
+      right: -52px;
+      bottom: -58px;
+
+      width: 150px;
+      height: 150px;
+
+      border-radius: 50%;
+      border: 2px solid transparent;
+
+      background:
+        conic-gradient(
+          from 180deg,
+          transparent 0deg,
+          rgba(240, 34, 45, 0.9) 60deg,
+          rgba(255, 120, 128, 0.9) 90deg,
+          rgba(240, 34, 45, 0.7) 120deg,
+          transparent 180deg
+        );
+
+      -webkit-mask:
+        radial-gradient(
+          farthest-side,
+          transparent calc(100% - 3px),
+          #000 calc(100% - 2px)
+        );
+
+      mask:
+        radial-gradient(
+          farthest-side,
+          transparent calc(100% - 3px),
+          #000 calc(100% - 2px)
+        );
+
+      filter:
+        drop-shadow(0 0 6px rgba(240, 34, 45, 0.9))
+        drop-shadow(0 0 16px rgba(240, 34, 45, 0.5));
+
+      pointer-events: none;
+    }
+
+    .exam-chip::after {
+      content: "";
+
+      position: absolute;
+      right: -30px;
+      bottom: -38px;
+
+      width: 96px;
+      height: 96px;
+
+      border-radius: 50%;
+
+      background:
+        conic-gradient(
+          from 190deg,
+          transparent 0deg,
+          rgba(240, 34, 45, 0.8) 55deg,
+          rgba(255, 140, 146, 0.85) 85deg,
+          transparent 150deg
+        );
+
+      -webkit-mask:
+        radial-gradient(
+          farthest-side,
+          transparent calc(100% - 2px),
+          #000 calc(100% - 1px)
+        );
+
+      mask:
+        radial-gradient(
+          farthest-side,
+          transparent calc(100% - 2px),
+          #000 calc(100% - 1px)
+        );
+
+      filter:
+        drop-shadow(0 0 5px rgba(240, 34, 45, 0.8))
+        drop-shadow(0 0 12px rgba(240, 34, 45, 0.4));
+
+      pointer-events: none;
+    }
+
+    .exam-chip__line {
+      position: absolute;
+      top: -30%;
+      right: 34%;
+
+      width: 1px;
+      height: 160%;
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent,
+          rgba(255, 255, 255, 0.14) 40%,
+          rgba(255, 255, 255, 0.05) 60%,
+          transparent
+        );
+
+      transform: rotate(24deg);
+      pointer-events: none;
+    }
+
+    .exam-chip__line--2 {
+      right: 28%;
+      opacity: 0.5;
+    }
+
+    .exam-chip__value {
+      position: relative;
+      z-index: 2;
+
+      color: var(--red);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      white-space: nowrap;
+
+      text-shadow: 0 0 20px rgba(240, 34, 45, 0.45);
+    }
+
+    .exam-chip__label {
+      position: relative;
+      z-index: 2;
+
+      display: block;
+      margin-top: 5px;
+
+      color: var(--dark-text-soft);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+
+    /* =========================================================
+       УСЛОВИЯ ЭКЗАМЕНА — НОВЫЕ ГОРИЗОНТАЛЬНЫЕ КАРТОЧКИ
+       ========================================================= */
+
+    .exam-conditions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .exam-condition {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 26px;
+
+      min-height: 138px;
+      padding: 25px 30px 25px 34px;
+
+      overflow: hidden;
+
+      border: 1px solid #dedee3;
+      border-radius: 18px;
+
+      background:
+        radial-gradient(
+          220px 130px at 100% 0%,
+          rgba(240, 34, 45, 0.045),
+          transparent 72%
+        ),
+        linear-gradient(135deg, #ffffff 0%, #ffffff 72%, #fcfcfd 100%);
+
+      box-shadow:
+        0 10px 28px rgba(16, 16, 19, 0.045),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    /* Красная полоса слева */
+    .exam-condition::before {
+      content: "";
+
+      position: absolute;
+      top: 22px;
+      bottom: 22px;
+      left: 0;
+
+      width: 4px;
+
+      border-radius: 0 6px 6px 0;
+      background: var(--red);
+
+      box-shadow: 0 0 16px rgba(240, 34, 45, 0.20);
+    }
+
+    /* Ненавязчивый декоративный круг */
+    .exam-condition::after {
+      content: "";
+
+      position: absolute;
+      top: -62px;
+      right: -62px;
+
+      width: 138px;
+      height: 138px;
+
+      border: 1px solid rgba(240, 34, 45, 0.09);
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 22px rgba(240, 34, 45, 0.018),
+        0 0 0 44px rgba(240, 34, 45, 0.012);
+
+      pointer-events: none;
+    }
+
+    .exam-condition:hover {
+      border-color: rgba(240, 34, 45, 0.32);
+
+      box-shadow:
+        0 20px 46px rgba(16, 16, 19, 0.085),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+      transform: translateY(-4px);
+    }
+
+    .exam-condition__heading {
+      position: relative;
+      z-index: 2;
+
+      align-self: stretch;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding-right: 24px;
+      border-right: 1px solid #e6e6ea;
+    }
+
+    .exam-condition__index {
+      display: inline-block;
+      margin-bottom: 8px;
+
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .exam-condition h3 {
+      margin: 0;
+
+      color: var(--text);
+      font-size: 19px;
+      line-height: 1.22;
+    }
+
+    .exam-condition p {
+      position: relative;
+      z-index: 2;
+
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.63;
+    }
+
+
+    /* Нижняя строка-примечание */
+
+    .exam-note {
+      margin-top: 14px;
+      padding: 18px 28px;
+
+      border: 1px solid rgba(240, 34, 45, 0.18);
+      border-radius: 999px;
+
+      background: linear-gradient(90deg, #ffe9ea, #fff6f6);
+    }
+
+    .exam-note p {
+      color: #3f3f46;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .exam-note strong {
+      color: var(--red);
+    }
+
+
+    /* =========================================================
+       ДЕМО-ТЕСТ + БЕГУЩАЯ СТРОКА
+       ========================================================= */
+
+    .demo-shell {
+      position: relative;
+
+      overflow: hidden;
+      border-radius: 30px;
+
+      color: var(--white);
+      background:
+        radial-gradient(
+          500px 380px at 100% 0%,
+          rgba(240, 34, 45, 0.22),
+          transparent 65%
+        ),
+        var(--black);
+
+      box-shadow: var(--shadow-lg);
+    }
+
+    .demo-shell::before {
+      content: "";
+
+      position: absolute;
+      right: -190px;
+      bottom: -270px;
+
+      width: 600px;
+      height: 600px;
+
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 60px rgba(255, 255, 255, 0.016),
+        0 0 0 120px rgba(255, 255, 255, 0.01);
+
+      pointer-events: none;
+    }
+
+    .marquee {
+      position: relative;
+      z-index: 3;
+
+      overflow: hidden;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+
+      padding: 16px 0;
+    }
+
+    .marquee__track {
+      display: flex;
+      width: max-content;
+      animation: marquee-move 30s linear infinite;
+    }
+
+    .marquee__group {
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    .marquee__item {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+
+      padding-right: 28px;
+
+      white-space: nowrap;
+
+      color: #f4f4f7;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .marquee__logo {
+      height: 22px;
+      width: auto;
+      flex: 0 0 auto;
+      opacity: 0.92;
+    }
+
+    @keyframes marquee-move {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .demo-inner {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+
+      padding: 55px 65px 65px;
+    }
+
+    .demo-copy h2 {
+      max-width: 100%;
+      color: var(--white);
+      font-size: clamp(30px, 2.9vw, 42px);
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+    }
+
+    .demo-copy > p {
+      max-width: 560px;
+      margin-top: 20px;
+
+      color: var(--dark-text);
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .demo-features {
+      margin: 28px 0;
+      list-style: none;
+    }
+
+    .demo-features li {
+      position: relative;
+
+      padding: 10px 0 10px 28px;
+
+      color: var(--dark-text);
+      font-size: 15.5px;
+      line-height: 1.55;
+    }
+
+    .demo-features li::before {
+      content: "";
+
+      position: absolute;
+      top: 21px;
+      left: 0;
+
+      width: 14px;
+      height: 2px;
+
+      background: var(--red);
+    }
+
+    .demo-dashboard {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .result-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 28px;
+
+      padding: 28px;
+
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.085),
+          rgba(255, 255, 255, 0.035)
+        );
+
+      backdrop-filter: blur(8px);
+    }
+
+    .result-ring {
+      --p: 0;
+      --ring-color: var(--red);
+
+      position: relative;
+
+      width: 120px;
+      height: 120px;
+      flex: 0 0 auto;
+
+      border-radius: 50%;
+
+      background:
+        conic-gradient(
+          var(--ring-color) calc(var(--p) * 1%),
+          #3a3a41 0
+        );
+
+      display: grid;
+      place-items: center;
+    }
+
+    .result-ring::before {
+      content: "";
+
+      position: absolute;
+      inset: 9px;
+
+      border-radius: 50%;
+      background: #1b1b20;
+    }
+
+    .result-ring span {
+      position: relative;
+      z-index: 2;
+
+      color: var(--white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .result-card__content strong {
+      display: block;
+      margin-bottom: 8px;
+
+      color: var(--white);
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .result-card__content p {
+      color: var(--dark-text);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .result-card__content a {
+      display: inline-block;
+      margin-top: 13px;
+      padding-bottom: 3px;
+
+      border-bottom: 2px solid var(--red);
+
+      color: var(--white);
+      font-size: 14.5px;
+      font-weight: 800;
+      text-decoration: none;
+
+      transition: color 0.22s ease;
+    }
+
+    .result-card__content a:hover {
+      color: #ff4a54;
+    }
+
+
+    /* =========================================================
+       СТАТУС ИНВЕСТОРА
+       ========================================================= */
+
+    .status-section {
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .status-section h2 {
+      color: var(--white);
+    }
+
+    .status-section .lead {
+      color: var(--dark-text);
+    }
+
+    .status-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: start;
+      gap: 60px;
+    }
+
+    .status-criteria {
+      display: grid;
+    }
+
+    .criterion {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      align-items: center;
+      gap: 30px;
+
+      padding: 26px 10px;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    .criterion:first-child {
+      border-top: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    .criterion__value {
+      color: var(--red);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .criterion p {
+      color: var(--dark-text);
+      font-size: 15.5px;
+      line-height: 1.68;
+    }
+
+    .certificate-path {
+      position: sticky;
+      top: 25px;
+
+      padding: 34px 32px;
+
+      overflow: hidden;
+      border-radius: 20px;
+
+      color: var(--text);
+      background: var(--white);
+      box-shadow: inset 0 6px 0 var(--red), var(--shadow-lg);
+    }
+
+    .certificate-path__badge {
+      display: inline-block;
+      margin-bottom: 26px;
+      padding: 9px 18px;
+
+      border: 1.5px solid var(--red);
+      border-radius: 999px;
+
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .certificate-path__hint {
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .certificate-path__price {
+      color: var(--red);
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .certificate-path__price-label {
+      margin-top: 6px;
+      margin-bottom: 22px;
+
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .certificate-path__text {
+      margin-bottom: 26px;
+
+      color: #35353c;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .certificate-path .button {
+      width: 100%;
+    }
+
+
+    /* =========================================================
+       КОМУ ПРЕДНАЗНАЧЕН ЭКЗАМЕН
+       ========================================================= */
+
+    .audience-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .audience-card {
+      position: relative;
+
+      min-height: 150px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 30px 32px;
+
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .audience-card:hover {
+      border-color: rgba(240, 34, 45, 0.32);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-6px);
+    }
+
+    .audience-card::after {
+      content: "";
+
+      position: absolute;
+      top: -70px;
+      right: -70px;
+
+      width: 170px;
+      height: 170px;
+
+      border-radius: 50%;
+      background: var(--red-light);
+    }
+
+    .audience-card::before {
+      content: "";
+
+      position: absolute;
+      bottom: 0;
+      left: 32px;
+
+      width: 44px;
+      height: 4px;
+
+      border-radius: 6px 6px 0 0;
+      background: var(--red);
+    }
+
+    .audience-card h3 {
+      position: relative;
+      z-index: 2;
+
+      max-width: 260px;
+      font-size: 23px;
+      line-height: 1.2;
+    }
+
+
+    /* =========================================================
+       ШАГИ ПОСЛЕ ПОЛУЧЕНИЯ СЕРТИФИКАТА
+       ========================================================= */
+
+    .procedure-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: stretch;
+      gap: 14px;
+
+      margin-top: 42px;
+    }
+
+    .procedure-step {
+      position: relative;
+
+      padding: 26px 24px;
+
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+
+      background: var(--white);
+
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .procedure-step:hover {
+      border-color: rgba(240, 34, 45, 0.24);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-5px);
+    }
+
+    .procedure-step__number {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+
+      margin-bottom: 30px;
+
+      border: 2px solid var(--red);
+      border-radius: 50%;
+
+      color: var(--red);
+      background: var(--white);
+
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .procedure-step h3 {
+      margin-bottom: 12px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .procedure-step p {
+      color: var(--gray);
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+
+    .procedure-step::after {
+      content: "";
+
+      position: absolute;
+      right: -36px;
+      bottom: -40px;
+
+      width: 110px;
+      height: 110px;
+
+      border: 1px solid var(--red-soft);
+      border-radius: 50%;
+    }
+
+
+    /* =========================================================
+       РЕГИСТРАЦИЯ
+       ========================================================= */
+
+    .register-shell {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 60px;
+
+      padding: 65px;
+
+      overflow: hidden;
+      border-radius: 30px;
+
+      color: var(--white);
+      background:
+        radial-gradient(
+          600px 420px at 0% 100%,
+          rgba(240, 34, 45, 0.20),
+          transparent 65%
+        ),
+        linear-gradient(160deg, #1a1a20, #101013 60%);
+
+      box-shadow: var(--shadow-lg);
+    }
+
+    .register-shell::before {
+      content: "";
+
+      position: absolute;
+      top: -180px;
+      right: -140px;
+
+      width: 480px;
+      height: 480px;
+
+      border: 1px solid rgba(240, 34, 45, 0.28);
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 50px rgba(240, 34, 45, 0.04),
+        0 0 0 100px rgba(240, 34, 45, 0.02);
+
+      pointer-events: none;
+    }
+
+    .register-copy,
+    .register-panel {
+      position: relative;
+      z-index: 2;
+    }
+
+    .register-copy h2 {
+      max-width: 540px;
+      color: var(--white);
+      font-size: clamp(32px, 3.4vw, 48px);
+      line-height: 1.1;
+    }
+
+    .register-copy > p {
+      max-width: 520px;
+      margin-top: 20px;
+
+      color: var(--dark-text);
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .register-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      margin-top: 32px;
+    }
+
+    .register-panel {
+      padding: 34px;
+
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 22px;
+
+      background: rgba(255, 255, 255, 0.055);
+
+      backdrop-filter: blur(8px);
+    }
+
+    .register-list {
+      list-style: none;
+    }
+
+    .register-list li {
+      position: relative;
+
+      padding: 13px 0 13px 36px;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+
+      color: var(--dark-text);
+      font-size: 15px;
+      line-height: 1.58;
+    }
+
+    .register-list li:last-child {
+      border-bottom: none;
+    }
+
+    .register-list li::before {
+      content: "✓";
+
+      position: absolute;
+      top: 13px;
+      left: 0;
+
+      display: grid;
+      width: 22px;
+      height: 22px;
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: var(--white);
+      background: var(--red);
+
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .register-note {
+      margin-top: 22px;
+
+      color: var(--dark-text-soft);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+
+    /* =========================================================
+       FAQ
+       ========================================================= */
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 0.6fr 1.4fr;
+      align-items: start;
+      gap: 70px;
+    }
+
+    .faq-intro {
+      position: sticky;
+      top: 30px;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .accordion {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+
+      background: var(--white);
+
+      transition:
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .accordion[open] {
+      border-color: rgba(240, 34, 45, 0.55);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .accordion summary {
+      min-height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      padding: 20px 23px;
+
+      color: var(--text);
+      font-size: 16.5px;
+      font-weight: 800;
+      line-height: 1.45;
+      list-style: none;
+
+      cursor: pointer;
+    }
+
+    .accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /*
+      Плюс больше не является текстовым символом.
+      Обе линии рисуются фоновыми градиентами,
+      поэтому знак геометрически расположен по центру.
+    */
+    .accordion summary::after {
+      content: "";
+
+      display: block;
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+
+      border: 1px solid rgba(240, 34, 45, 0.06);
+      border-radius: 50%;
+
+      background:
+        linear-gradient(var(--red), var(--red))
+          center / 13px 2px no-repeat,
+        linear-gradient(var(--red), var(--red))
+          center / 2px 13px no-repeat,
+        var(--red-light);
+
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 4px 12px rgba(240, 34, 45, 0.06);
+
+      transition:
+        background-color 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    /*
+      В раскрытом состоянии остаётся одна горизонтальная линия —
+      получается ровный минус вместо повёрнутого крестика.
+    */
+    .accordion[open] summary::after {
+      background:
+        linear-gradient(var(--white), var(--white))
+          center / 13px 2px no-repeat,
+        var(--red);
+
+      box-shadow:
+        0 7px 18px rgba(240, 34, 45, 0.20);
+    }
+
+    .accordion__body {
+      padding: 0 23px 22px;
+
+      color: var(--gray);
+      font-size: 15.5px;
+      line-height: 1.72;
+    }
+
+
+    /* =========================================================
+       АДАПТИВНОСТЬ
+       ========================================================= */
+
+    @media (max-width: 1250px) {
+      .container {
+        padding: 0 60px;
+      }
+
+      .procedure-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .exam-condition {
+        grid-template-columns: minmax(145px, 0.38fr) minmax(0, 1fr);
+        gap: 22px;
+        padding-right: 25px;
+      }
+    }
+
+    @media (max-width: 1050px) {
+      .status-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .certificate-path {
+        position: static;
+        max-width: 480px;
+      }
+
+      .register-shell {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .audience-row {
+        grid-template-columns: 1fr;
+      }
+
+      .audience-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 900px) {
+      section {
+        padding: 40px 0;
+      }
+
+      .container {
+        padding: 0 24px;
+      }
+
+      .exam-strip {
+        flex-direction: column;
+      }
+
+      .exam-conditions {
+        grid-template-columns: 1fr;
+      }
+
+      .exam-condition {
+        grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+      }
+
+      .demo-inner {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        padding: 40px 45px 50px;
+      }
+
+      .faq-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-intro {
+        position: static;
+      }
+
+      .procedure-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .criterion {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        padding: 0 19px;
+      }
+
+      section {
+        padding: 36px 0;
+      }
+
+      h1 {
+        font-size: 41px;
+      }
+
+      h2 {
+        font-size: 34px;
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+
+      .exam-condition {
+        grid-template-columns: 1fr;
+        gap: 15px;
+
+        min-height: auto;
+        padding: 24px 23px 25px 27px;
+      }
+
+      .exam-condition__heading {
+        align-self: auto;
+        padding-right: 0;
+        padding-bottom: 15px;
+
+        border-right: 0;
+        border-bottom: 1px solid #e6e6ea;
+      }
+
+      .exam-condition__index {
+        margin-bottom: 7px;
+      }
+
+      .demo-inner {
+        padding: 28px 23px 36px;
+      }
+
+      .demo-shell {
+        border-radius: 22px;
+      }
+
+      .result-card {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+
+        padding: 24px 20px;
+      }
+
+      .procedure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .register-shell {
+        padding: 37px 23px;
+        border-radius: 23px;
+      }
+
+      .register-panel {
+        padding: 24px 20px;
+      }
+
+      .register-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .exam-note {
+        border-radius: 20px;
+      }
+
+      .accordion summary {
+        min-height: 68px;
+        padding: 18px 18px;
+        font-size: 15.5px;
+      }
+
+      .accordion summary::after {
+        flex-basis: 32px;
+        width: 32px;
+        height: 32px;
+      }
+
+      .accordion__body {
+        padding: 0 18px 20px;
+        font-size: 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .marquee__track {
+        animation: none;
+      }
+    }
+
+
+    /* =========================================================
+       ТИПОГРАФИКА — ШРИФТ ОСТАВЛЕН БЕЗ ИЗМЕНЕНИЙ
+       ========================================================= */
+
+    body,
+    button,
+    input,
+    textarea,
+    select {
+      font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Arial,
+        sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Arial,
+        sans-serif;
+
+      font-weight: 800;
+      letter-spacing: -0.032em;
+    }
+
+    p,
+    li,
+    span,
+    a,
+    summary {
+      font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Arial,
+        sans-serif;
+    }
+
+    .button {
+      font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Arial,
+        sans-serif;
+
+      font-weight: 700;
+      letter-spacing: normal;
+    }
+
+    .eyebrow {
+      font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Arial,
+        sans-serif;
+
+      font-weight: 700;
+      letter-spacing: 0.13em;
+    }
+
+    .exam-chip__value,
+    .criterion__value,
+    .certificate-path__price,
+    .result-ring span,
+    .procedure-step__number {
+      font-family:
+        "Segoe UI",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Arial,
+        sans-serif;
+
+      font-weight: 800;
+    }
+
+    .audience-card h3,
+    .exam-condition h3,
+    .procedure-step h3 {
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+
+    .accordion summary {
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+
+    <!-- =====================================================
+         ВСЁ ОБ ЭКЗАМЕНЕ
+         ===================================================== -->
+
+    <section class="section-light">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <h2>Всё об экзамене</h2>
+        </div>
+
+
+        <div class="exam-strip reveal">
+
+          <div class="exam-chip">
+            <span class="exam-chip__line"></span>
+            <span class="exam-chip__line exam-chip__line--2"></span>
+            <span class="exam-chip__value">50</span>
+            <span class="exam-chip__label">вопросов в экзамене</span>
+          </div>
+
+          <div class="exam-chip">
+            <span class="exam-chip__line"></span>
+            <span class="exam-chip__line exam-chip__line--2"></span>
+            <span class="exam-chip__value">120</span>
+            <span class="exam-chip__label">минут на прохождение</span>
+          </div>
+
+          <div class="exam-chip">
+            <span class="exam-chip__line"></span>
+            <span class="exam-chip__line exam-chip__line--2"></span>
+            <span class="exam-chip__value">500</span>
+            <span class="exam-chip__label">
+              вопросов в базе, верифицированной экспертами
+            </span>
+          </div>
+
+          <div class="exam-chip">
+            <span class="exam-chip__line"></span>
+            <span class="exam-chip__line exam-chip__line--2"></span>
+            <span class="exam-chip__value">7</span>
+            <span class="exam-chip__label">
+              дней до появления сертификата в личном кабинете
+            </span>
+          </div>
+
+          <div class="exam-chip">
+            <span class="exam-chip__line"></span>
+            <span class="exam-chip__line exam-chip__line--2"></span>
+            <span class="exam-chip__value">RU</span>
+            <span class="exam-chip__label">
+              экзамен проводится на русском языке
+            </span>
+          </div>
+
+        </div>
+
+
+        <!-- Новые горизонтальные карточки -->
+
+        <div class="exam-conditions">
+
+          <article class="exam-condition reveal">
+            <div class="exam-condition__heading">
+              
+              <h3>Регистрация и допуск</h3>
+            </div>
+
+            <p>
+              К экзамену допускаются граждане РФ от 18 лет
+              при условии идентификации по паспорту и наличии
+              подтверждённой учётной записи на Госуслугах.
+            </p>
+          </article>
+
+          <article class="exam-condition reveal">
+            <div class="exam-condition__heading">
+              
+              <h3>Формат проведения</h3>
+            </div>
+
+            <p>
+              Экзамен проводится дистанционно с применением
+              технологий прокторинга либо очно — оба формата
+              обеспечивают равный уровень объективности
+              проверки знаний.
+            </p>
+          </article>
+
+          <article class="exam-condition reveal">
+            <div class="exam-condition__heading">
+              
+              <h3>Параметры экзамена</h3>
+            </div>
+
+            <p>
+              50 вопросов, 120 минут на прохождение.
+              База из 500 вопросов, разработанных и
+              верифицированных экспертами, прошедших
+              независимую экспертизу.
+            </p>
+          </article>
+
+          <article class="exam-condition reveal">
+            <div class="exam-condition__heading">
+              
+              <h3>Стоимость и подготовка</h3>
+            </div>
+
+            <p>
+              Стоимость экзамена: 0 000 рублей.
+              Для подготовки доступен бесплатный
+              демонстрационный тест, отражающий структуру
+              и уровень сложности реального экзамена.
+            </p>
+          </article>
+
+        </div>
+
+
+        <div class="exam-note reveal">
+          <p>
+            <strong>Сроки и язык:</strong>
+            сертификат становится доступен в личном кабинете
+            в течение 7 дней после успешной сдачи экзамена.
+            Экзамен проводится на русском языке.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         ДЕМО-ТЕСТ
+         ===================================================== -->
+
+    <section id="demo">
+      <div class="container">
+
+        <div class="demo-shell reveal">
+
+          <div class="marquee" aria-hidden="true">
+            <div class="marquee__track">
+
+              <div class="marquee__group">
+                <span class="marquee__item">50 вопросов <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">120 минут <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Сертификат за 7 дней <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Иностранные ценные бумаги <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Паи ЗПИФ <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Структурные продукты <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Внебиржевые сделки <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">IPO · PRE-IPO <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Цифровые финансовые активы <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+              </div>
+
+              <div class="marquee__group">
+                <span class="marquee__item">50 вопросов <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">120 минут <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Сертификат за 7 дней <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Иностранные ценные бумаги <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Паи ЗПИФ <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Структурные продукты <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Внебиржевые сделки <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">IPO · PRE-IPO <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+                <span class="marquee__item">Цифровые финансовые активы <img class="marquee__logo" src="ФПС лого.svg" alt=""></span>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="demo-inner">
+
+            <div class="demo-copy">
+              <h2>
+                Оцените уровень своей квалификации
+                перед&nbsp;официальным экзаменом
+              </h2>
+
+              <p>
+                Пройдите демонстрационный тест по шести темам,
+                получите объективную оценку своей готовности
+                и рекомендации по дальнейшей подготовке.
+              </p>
+
+              <ul class="demo-features">
+                <li>50 вопросов из разных экзаменационных тем.</li>
+                <li>Результат — сразу после прохождения.</li>
+                <li>Разбивка результата по темам.</li>
+                <li>Рекомендации по подготовке.</li>
+                <li>Оценка готовности к официальному экзамену.</li>
+              </ul>
+
+              <a href="#" class="button button--red">
+                Пройти бесплатный демо-тест
+              </a>
+            </div>
+
+
+            <div class="demo-dashboard">
+
+              <article class="result-card">
+                <div
+                  class="result-ring"
+                  data-percent="82"
+                  style="--ring-color: var(--red);"
+                >
+                  <span>0%</span>
+                </div>
+
+                <div class="result-card__content">
+                  <strong>
+                    Результат при высоком уровне готовности
+                  </strong>
+
+                  <p>
+                    Ваш результат — 82%. Уровень знаний
+                    соответствует требованиям экзамена.
+                  </p>
+
+                  <a href="#register">Выбрать дату экзамена →</a>
+                </div>
+              </article>
+
+
+              <article class="result-card">
+                <div
+                  class="result-ring"
+                  data-percent="58"
+                  style="--ring-color: #b9b9c1;"
+                >
+                  <span>0%</span>
+                </div>
+
+                <div class="result-card__content">
+                  <strong>
+                    Результат при недостаточном уровне готовности
+                  </strong>
+
+                  <p>
+                    Ваш результат — 58%. Рекомендуем дополнительно
+                    проработать две темы перед прохождением
+                    официального экзамена.
+                  </p>
+
+                  <a href="#">
+                    Получить материалы для подготовки →
+                  </a>
+                </div>
+              </article>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         СТАТУС ИНВЕСТОРА
+         ===================================================== -->
+
+    <section class="status-section">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <h2>
+            Что необходимо для статуса
+            квалифицированного инвестора
+          </h2>
+
+          <p class="lead">
+            Статус квалифицированного инвестора можно
+            получить, выполнив одно из следующих условий:
+          </p>
+        </div>
+
+
+        <div class="status-layout">
+
+          <div class="status-criteria">
+
+            <article class="criterion reveal">
+              <span class="criterion__value">6 000 000 ₽</span>
+
+              <p>
+                Оборот по сделкам с ценными бумагами,
+                фьючерсами и опционами за последние
+                четыре завершённых квартала.
+              </p>
+            </article>
+
+            <article class="criterion reveal">
+              <span class="criterion__value">24 000 000 ₽</span>
+
+              <p>
+                Активы на счетах в банках и у брокеров.
+              </p>
+            </article>
+
+            <article class="criterion reveal">
+              <span class="criterion__value">Опыт работы</span>
+
+              <p>
+                Опыт работы в организации, совершавшей сделки
+                с ценными бумагами.
+              </p>
+            </article>
+
+            <article class="criterion reveal">
+              <span class="criterion__value">Диплом</span>
+
+              <p>
+                Диплом о высшем экономическом образовании
+                по установленным специальностям.
+              </p>
+            </article>
+
+            <article class="criterion reveal">
+              <span class="criterion__value">Сертификат</span>
+
+              <p>
+                Квалификация в сфере ценных бумаг,
+                подтверждённая сертификатом установленного
+                образца.
+              </p>
+            </article>
+
+            <article class="criterion reveal">
+              <span class="criterion__value">12 000 000 ₽ / год</span>
+
+              <p>
+                Доход за два последних полных года.
+              </p>
+            </article>
+
+          </div>
+
+
+          <aside class="certificate-path reveal">
+            <span class="certificate-path__badge">
+              Путь через сертификат
+            </span>
+
+            <p class="certificate-path__hint">
+              Критерий активов — не обязателен
+            </p>
+
+            <div class="certificate-path__price">0 000 ₽</div>
+
+            <p class="certificate-path__price-label">
+              стоимость экзамена
+            </p>
+
+            <p class="certificate-path__text">
+              <strong>
+                Путь через сертификат позволяет подтвердить
+                квалификацию знаниями
+              </strong>
+              — без необходимости соответствовать критериям
+              по капиталу или доходу.
+            </p>
+
+            <a href="#register" class="button button--red">
+              Выбрать дату и записаться
+              <span class="button__arrow">→</span>
+            </a>
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         КОМУ ПРЕДНАЗНАЧЕН ЭКЗАМЕН
+         ===================================================== -->
+
+    <section>
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <h2>Кому предназначен экзамен</h2>
+        </div>
+
+        <div class="audience-row">
+
+          <article class="audience-card reveal">
+            <h3>Инвесторам и трейдерам</h3>
+          </article>
+
+          <article class="audience-card reveal">
+            <h3>Специалистам финансовой сферы</h3>
+          </article>
+
+          <article class="audience-card reveal">
+            <h3>Инвесторам без ценза</h3>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         ПОСЛЕ ПОЛУЧЕНИЯ СЕРТИФИКАТА
+         ===================================================== -->
+
+    <section class="section-light">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <h2>
+            Что нужно сделать после получения сертификата
+          </h2>
+        </div>
+
+
+        <div class="procedure-grid">
+
+          <article class="procedure-step reveal">
+            <div class="procedure-step__number">1</div>
+
+            <h3>Проверка данных</h3>
+
+            <p>
+              Проверить корректность данных в сертификате:
+              ФИО, номер документа, дату выдачи.
+            </p>
+          </article>
+
+          <article class="procedure-step reveal">
+            <div class="procedure-step__number">2</div>
+
+            <h3>Обращение</h3>
+
+            <p>
+              Инвестор обращается к брокеру или управляющей
+              компании, имеющим право признания лиц
+              квалифицированными инвесторами.
+            </p>
+          </article>
+
+          <article class="procedure-step reveal">
+            <div class="procedure-step__number">3</div>
+
+            <h3>Предъявление сертификата</h3>
+
+            <p>
+              Предъявляет сертификат вместе с заявлением
+              о признании квалифицированным инвестором.
+            </p>
+          </article>
+
+          <article class="procedure-step reveal">
+            <div class="procedure-step__number">4</div>
+
+            <h3>Проверка и реестр</h3>
+
+            <p>
+              Брокер или управляющая компания проверяет
+              подлинность сертификата и вносит сведения
+              об инвесторе в реестр квалифицированных
+              инвесторов.
+            </p>
+          </article>
+
+          <article class="procedure-step reveal">
+            <div class="procedure-step__number">5</div>
+
+            <h3>Доступ к инструментам</h3>
+
+            <p>
+              С момента внесения в реестр инвестор получает
+              доступ к инструментам, предназначенным
+              для квалифицированных инвесторов.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         РЕГИСТРАЦИЯ
+         ===================================================== -->
+
+    <section id="register">
+      <div class="container">
+
+        <div class="register-shell reveal">
+
+          <div class="register-copy">
+
+            <h2>
+              Подтвердите квалификацию
+              <span class="accent">официально</span>
+            </h2>
+
+            <p>
+              Выберите дату экзамена, пройдите проверку знаний
+              по шести темам и получите сертификат,
+              признаваемый наравне с документами иных
+              аккредитованных организаций.
+            </p>
+
+            <div class="register-actions">
+              <a href="tel:+70000000000" class="button button--red">
+                Позвоните для записи
+              </a>
+
+              <a href="#demo" class="button button--ghost-white">
+                Пройти бесплатный демо-тест
+              </a>
+            </div>
+          </div>
+
+
+          <div class="register-panel">
+
+            <ul class="register-list">
+              <li>
+                Признанный на уровне закона путь получения
+                статуса — без подтверждения дохода или капитала.
+              </li>
+
+              <li>
+                Дистанционный или очный формат
+                с технологией прокторинга.
+              </li>
+
+              <li>
+                Проверка знаний по шести профильным темам.
+              </li>
+
+              <li>
+                Прозрачные и объективные критерии оценки.
+              </li>
+
+              <li>
+                Персональный результат с разбивкой по темам.
+              </li>
+
+              <li>
+                Сертификат в личном кабинете в течение
+                7 дней после успешной сдачи.
+              </li>
+            </ul>
+
+            <p class="register-note">
+              На странице записи также указываются: ближайшая
+              доступная дата экзамена, стоимость
+              и продолжительность прохождения. Перед заполнением
+              регистрационной формы рекомендуем ознакомиться
+              с перечнем необходимых документов и Правилами
+              проведения экзамена.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         FAQ
+         ===================================================== -->
+
+    <section class="section-light">
+      <div class="container faq-layout">
+
+        <div class="faq-intro reveal">
+          <h2>Часто задаваемые вопросы</h2>
+        </div>
+
+
+        <div class="faq-list">
+
+          <details class="accordion reveal">
+            <summary>
+              Можно ли сдавать экзамен несколько раз?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Да. Интервал между попытками устанавливается
+                организатором.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Нужно ли сдавать экзамен повторно
+              при смене брокера?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Нет. Сертификат учитывается централизованно
+                и признаётся любым брокером, имеющим право
+                признания квалифицированных инвесторов.
+                Новый брокер вправе запросить подтверждение
+                статуса — сертификат в этом случае выступает
+                основным подтверждающим документом.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Можно ли сдавать экзамен на смартфоне?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Нет. Для прохождения экзамена требуется
+                компьютер или ноутбук с камерой и микрофоном —
+                это обеспечивает корректную работу системы
+                прокторинга.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Что происходит после успешной сдачи?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Сертификат появляется в личном кабинете
+                и может быть предъявлен брокеру или управляющей
+                компании для внесения в реестр
+                квалифицированных инвесторов.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Что нужно сделать после получения сертификата?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Проверить корректность данных в сертификате
+                (ФИО, номер документа, дату выдачи), обратиться
+                к брокеру или в управляющую компанию
+                с заявлением о признании квалифицированным
+                инвестором, предъявить оригинал или надлежащим
+                образом заверенную копию сертификата и дождаться
+                внесения сведений в реестр — организация обязана
+                уведомить о принятом решении.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Открывает ли статус доступ ко всем инструментам
+              автоматически?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Нет. Статус квалифицированного инвестора
+                не открывает автоматический доступ ко всем
+                инструментам — брокер вправе ограничивать доступ
+                к отдельным продуктам в рамках собственной
+                системы управления рисками.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Кто отвечает за инвестиционные риски после
+              получения статуса?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Получение статуса на основании сертификата
+                не отменяет обязанности инвестора самостоятельно
+                оценивать риски: законодатель исходит из того,
+                что квалифицированный инвестор способен принимать
+                решения без дополнительной защиты,
+                предусмотренной для неквалифицированных лиц.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Гарантирует ли сертификат доходность инвестиций?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Нет. Сертификат подтверждает уровень знаний,
+                а не гарантирует доходность инвестиций.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion reveal">
+            <summary>
+              Можно ли отказаться от статуса?
+            </summary>
+
+            <div class="accordion__body">
+              <p>
+                Да. Отказ оформляется через заявление
+                в организацию, признавшую статус.
+              </p>
+            </div>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      /* Плавная прокрутка */
+
+      document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            const href = link.getAttribute("href");
+
+            if (!href || href === "#") {
+              return;
+            }
+
+            const target = document.querySelector(href);
+
+            if (!target) {
+              return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          });
+        });
+
+
+      /* Появление элементов */
+
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          function (entries, observer) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) {
+                return;
+              }
+
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.08,
+            rootMargin: "0px 0px -40px 0px"
+          }
+        );
+
+        revealElements.forEach(function (element) {
+          revealObserver.observe(element);
+        });
+      } else {
+        revealElements.forEach(function (element) {
+          element.classList.add("is-visible");
+        });
+      }
+
+
+      /* Анимация колец */
+
+      const demoSection = document.getElementById("demo");
+      const resultRings = document.querySelectorAll(".result-ring");
+      let ringsAnimated = false;
+
+      function animateRings() {
+        if (ringsAnimated) {
+          return;
+        }
+
+        ringsAnimated = true;
+
+        resultRings.forEach(function (ring) {
+          const target = parseInt(
+            ring.dataset.percent || "0",
+            10
+          );
+
+          const label = ring.querySelector("span");
+          const duration = 1400;
+          const start = performance.now();
+
+          function tick(now) {
+            let progress = (now - start) / duration;
+
+            if (progress > 1) {
+              progress = 1;
+            }
+
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = Math.round(target * eased);
+
+            ring.style.setProperty("--p", value);
+
+            if (label) {
+              label.textContent = value + "%";
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(tick);
+            }
+          }
+
+          requestAnimationFrame(tick);
+        });
+      }
+
+      if (demoSection && "IntersectionObserver" in window) {
+        const resultObserver = new IntersectionObserver(
+          function (entries, observer) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) {
+                return;
+              }
+
+              animateRings();
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.3
+          }
+        );
+
+        resultObserver.observe(demoSection);
+      } else {
+        animateRings();
+      }
+
+
+      /* В FAQ одновременно открыт только один пункт */
+
+      const accordions = document.querySelectorAll(".accordion");
+
+      accordions.forEach(function (accordion) {
+        accordion.addEventListener("toggle", function () {
+          if (!accordion.open) {
+            return;
+          }
+
+          accordions.forEach(function (otherAccordion) {
+            if (otherAccordion !== accordion) {
+              otherAccordion.removeAttribute("open");
+            }
+          });
+        });
+      });
+
+    });
+  </script>
+
+</body>
+</html>
