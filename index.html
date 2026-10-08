@@ -275,26 +275,21 @@
    ВИДЕО-ОБЛОЖКА
    ========================================================= */
 
-/* =========================================================
-   ВИДЕО-ОБЛОЖКА
-   ========================================================= */
-
 .hero-video {
   padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;          /* корректная высота на мобильных */
-  background: var(--black); /* цвет полей, если пропорции не совпали */
-  overflow: hidden;
+  background: var(--black);
 }
 
 .hero-video__player {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;     /* показывает ролик ЦЕЛИКОМ, без обрезки */
+  height: auto;        /* высота по пропорциям ролика */
 }
+
+@media (max-width: 720px) {
+  .hero-video__player {
+    height: 60vh;
+  }
 }
 
     /* =========================================================
@@ -1751,14 +1746,19 @@
        ===================================================== -->
 
   <section class="hero-video">
-  <video
-    class="hero-video__player"
-    id="heroVideo"
-    src="video.mp4"
-    autoplay muted playsinline preload="auto"
-  ></video>
-</section>
-
+    <video
+      class="hero-video__player"
+      id="heroVideo"
+      src="ФПС СКИ 1 блок.mp4"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+      poster="poster.jpg"
+    >
+      Ваш браузер не поддерживает воспроизведение видео.
+    </video>
+  </section>
 
   <!-- дальше идёт существующая секция "Всё об экзамене" -->
 
