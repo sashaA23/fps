@@ -277,16 +277,13 @@
 
 .hero-video {
   padding: 0;
-  overflow: hidden;
   background: var(--black);
 }
 
 .hero-video__player {
   display: block;
   width: 100%;
-  height: 100vh;      /* на всю высоту экрана */
-  max-height: 820px;  /* ограничение на больших мониторах */
-  object-fit: cover;  /* заполняет блок без искажений */
+  height: auto;        /* высота по пропорциям ролика */
 }
 
 @media (max-width: 720px) {
