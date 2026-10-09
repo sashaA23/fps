@@ -22,7 +22,6 @@
 
       --text: #151519;
 
-      /* Более контрастный текст на светлом фоне */
       --gray: #47474f;
       --gray-soft: #62626b;
 
@@ -31,11 +30,6 @@
 
       --line: #e2e2e6;
 
-      /*
-        Основной и вспомогательный текст на тёмном фоне.
-        Это не чистый белый, поэтому иерархия с заголовками
-        сохраняется, но текст больше не выглядит тусклым.
-      */
       --dark-text: #eeeef2;
       --dark-text-soft: #d7d7de;
       --dark-text-muted: #bdbdc7;
@@ -271,30 +265,54 @@
       transform: translateX(5px);
     }
 
+
     /* =========================================================
-   ВИДЕО-ОБЛОЖКА — ровно один экран по высоте
-   ========================================================= */
+       ВИДЕО-ОБЛОЖКА — один экран, размытая подложка по бокам
+       ========================================================= */
 
-.hero-video {
-  padding: 0;
-  margin: 0;
+    .hero-video {
+      position: relative;
 
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;           /* точная высота на мобильных */
+      padding: 0;
+      margin: 0;
 
-  overflow: hidden;
-  background: var(--black); /* цвет полей, если пропорции ролика ≠ экрану */
-}
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
 
-.hero-video__player {
-  display: block;
-  width: 100%;
-  height: 100%;
+      overflow: hidden;
+      background: var(--black);
+    }
 
-  object-fit: contain;      /* ролик целиком, ничего не срезается */
-  object-position: center;
-}
+    /* Размытая копия ролика на весь экран */
+    .hero-video__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      filter: blur(28px) brightness(0.55);
+      transform: scale(1.1);
+
+      pointer-events: none;
+    }
+
+    /* Основное видео — вписано целиком, по центру */
+    .hero-video__player {
+      position: relative;
+      z-index: 2;
+
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+      object-position: center;
+    }
 
 
     /* =========================================================
@@ -486,7 +504,7 @@
 
 
     /* =========================================================
-       УСЛОВИЯ ЭКЗАМЕНА — НОВЫЕ ГОРИЗОНТАЛЬНЫЕ КАРТОЧКИ
+       УСЛОВИЯ ЭКЗАМЕНА — ГОРИЗОНТАЛЬНЫЕ КАРТОЧКИ
        ========================================================= */
 
     .exam-conditions {
@@ -529,7 +547,6 @@
         transform 0.25s ease;
     }
 
-    /* Красная полоса слева */
     .exam-condition::before {
       content: "";
 
@@ -546,7 +563,6 @@
       box-shadow: 0 0 16px rgba(240, 34, 45, 0.20);
     }
 
-    /* Ненавязчивый декоративный круг */
     .exam-condition::after {
       content: "";
 
@@ -619,9 +635,6 @@
       font-size: 15px;
       line-height: 1.63;
     }
-
-
-    /* Нижняя строка-примечание */
 
     .exam-note {
       margin-top: 14px;
@@ -1381,11 +1394,6 @@
       display: none;
     }
 
-    /*
-      Плюс больше не является текстовым символом.
-      Обе линии рисуются фоновыми градиентами,
-      поэтому знак геометрически расположен по центру.
-    */
     .accordion summary::after {
       content: "";
 
@@ -1413,10 +1421,6 @@
         box-shadow 0.22s ease;
     }
 
-    /*
-      В раскрытом состоянии остаётся одна горизонтальная линия —
-      получается ровный минус вместо повёрнутого крестика.
-    */
     .accordion[open] summary::after {
       background:
         linear-gradient(var(--white), var(--white))
@@ -1485,6 +1489,11 @@
         padding: 40px 0;
       }
 
+      /* Видео-секция не должна получать отступы */
+      section.hero-video {
+        padding: 0;
+      }
+
       .container {
         padding: 0 24px;
       }
@@ -1532,6 +1541,10 @@
 
       section {
         padding: 36px 0;
+      }
+
+      section.hero-video {
+        padding: 0;
       }
 
       h1 {
@@ -1639,7 +1652,7 @@
 
 
     /* =========================================================
-       ТИПОГРАФИКА — ШРИФТ ОСТАВЛЕН БЕЗ ИЗМЕНЕНИЙ
+       ТИПОГРАФИКА
        ========================================================= */
 
     body,
@@ -1744,28 +1757,39 @@
 <body>
 
   <main>
-    
 
-  <!-- =====================================================
-       ВИДЕО-ОБЛОЖКА
-       ===================================================== -->
+    <!-- =====================================================
+         ВИДЕО-ОБЛОЖКА
+         ===================================================== -->
 
-  <section class="hero-video">
-    <video
-      class="hero-video__player"
-      id="heroVideo"
-      src="ФПС СКИ 1 блок.mp4"
-      autoplay
-      muted
-      playsinline
-      preload="auto"
-      poster="poster.jpg"
-    >
-      Ваш браузер не поддерживает воспроизведение видео.
-    </video>
-  </section>
+    <section class="hero-video">
 
-  <!-- дальше идёт существующая секция "Всё об экзамене" -->
+      <!-- Размытая подложка — закрывает поля по бокам -->
+      <video
+        class="hero-video__bg"
+        src="ФПС СКИ 1 блок.mp4"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+        tabindex="-1"
+      ></video>
+
+      <!-- Основное видео — целиком, без обрезки -->
+      <video
+        class="hero-video__player"
+        id="heroVideo"
+        src="ФПС СКИ 1 блок.mp4"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+      >
+        Ваш браузер не поддерживает воспроизведение видео.
+      </video>
+
+    </section>
 
 
     <!-- =====================================================
@@ -1826,13 +1850,10 @@
         </div>
 
 
-        <!-- Новые горизонтальные карточки -->
-
         <div class="exam-conditions">
 
           <article class="exam-condition reveal">
             <div class="exam-condition__heading">
-              
               <h3>Регистрация и допуск</h3>
             </div>
 
@@ -1845,7 +1866,6 @@
 
           <article class="exam-condition reveal">
             <div class="exam-condition__heading">
-              
               <h3>Формат проведения</h3>
             </div>
 
@@ -1859,7 +1879,6 @@
 
           <article class="exam-condition reveal">
             <div class="exam-condition__heading">
-              
               <h3>Параметры экзамена</h3>
             </div>
 
@@ -1873,7 +1892,6 @@
 
           <article class="exam-condition reveal">
             <div class="exam-condition__heading">
-              
               <h3>Стоимость и подготовка</h3>
             </div>
 
@@ -1890,7 +1908,6 @@
 
         <div class="exam-note reveal">
           <p>
-            
             сертификат становится доступен в личном кабинете
             в течение 7 дней после успешной сдачи экзамена.
             Экзамен проводится на русском языке.
@@ -2508,27 +2525,53 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      /* Видео-обложка: один раз до конца, без повтора */
 
-const heroVideo = document.getElementById("heroVideo");
+      /* =====================================================
+         Видео-обложка: один раз до конца, без повтора
+         ===================================================== */
 
-if (heroVideo) {
-  heroVideo.loop = false;
+      const heroVideo = document.getElementById("heroVideo");
+      const heroBg = document.querySelector(".hero-video__bg");
 
-  heroVideo.addEventListener("ended", function () {
-    heroVideo.pause();
-    heroVideo.currentTime = heroVideo.duration; // остаёмся на последнем кадре
-  });
+      if (heroVideo) {
+        heroVideo.loop = false;
 
-  // Если браузер заблокировал автозапуск — запускаем по первому клику
-  heroVideo.play().catch(function () {
-    document.addEventListener(
-      "click",
-      function () { heroVideo.play(); },
-      { once: true }
-    );
-  });
-}
+        if (heroBg) {
+          heroBg.loop = false;
+        }
+
+        // В конце — останавливаем оба слоя на последнем кадре
+        heroVideo.addEventListener("ended", function () {
+          heroVideo.pause();
+          heroVideo.currentTime = heroVideo.duration;
+
+          if (heroBg) {
+            heroBg.pause();
+            heroBg.currentTime = heroBg.duration;
+          }
+        });
+
+        // Держим подложку синхронно с основным видео
+        heroVideo.addEventListener("play", function () {
+          if (heroBg && heroBg.paused) {
+            heroBg.currentTime = heroVideo.currentTime;
+            heroBg.play().catch(function () {});
+          }
+        });
+
+        // Если браузер заблокировал автозапуск — старт по первому клику
+        heroVideo.play().catch(function () {
+          document.addEventListener(
+            "click",
+            function () {
+              heroVideo.play();
+              if (heroBg) heroBg.play();
+            },
+            { once: true }
+          );
+        });
+      }
+
 
       /* Плавная прокрутка */
 
