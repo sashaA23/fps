@@ -298,7 +298,16 @@
       padding: 0 20px;
     }
 
-    /* --- кнопки: 1252 суммарно, gap 40, размеры 1:1 с макетом --- */
+    /* ГЛАВНЫЙ ФИКС: глобальное img{max-width:100%} не должен
+       резать фиксированные размеры SVG в hero */
+    .hero-nav img,
+    .hero-pill,
+    .hero-note,
+    .hero-cert img {
+      max-width: none;
+    }
+
+    /* --- кнопки: 1252 суммарно, gap 40, размеры 1:1 --- */
 
     .hero-nav {
       display: flex;
@@ -311,6 +320,7 @@
 
     .hero-nav a {
       display: block;
+      flex: 0 0 auto;
       opacity: 0;
       animation: nav-in 0.45s ease calc(2.4s + var(--i, 0) * 0.08s) forwards;
     }
@@ -321,6 +331,7 @@
 
     /* канвас 387×136 с тенью → кнопка ровно 307×56 */
     .hero-nav .nav-cta img {
+      width: 387px;
       height: 136px;
       margin: -22px -40px -58px -40px;
     }
@@ -427,7 +438,7 @@
       align-self: flex-start;
       width: auto;
       height: 78px;
-      margin: auto 0 -24px 80px;
+      margin: auto -18px -24px -18px;
 
       opacity: 0;
       animation: note-in 0.5s ease 2.7s forwards;
@@ -1682,7 +1693,7 @@
       }
 
       .hero-note {
-        margin: 40px 0 -24px 0;
+        margin: 40px -18px -24px -18px;
       }
     }
 
@@ -1831,6 +1842,7 @@
       }
 
       .hero-nav .nav-cta img {
+        width: 312px;
         height: 110px;
         margin: -18px -32px -46px -32px;
       }
@@ -1866,6 +1878,7 @@
       }
 
       .hero-cert {
+        justify-self: center;
         width: 100%;
         max-width: 373px;
         height: auto;
