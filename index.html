@@ -267,51 +267,151 @@
 
 
     /* =========================================================
-       ВИДЕО-ОБЛОЖКА — один экран, размытая подложка по бокам
+       БЛОК 1 — HERO: фон во всю ширину, пилюли вылетают
        ========================================================= */
 
-    .hero-video {
+    .hero {
       position: relative;
-
-      padding: 0;
-      margin: 0;
-
-      width: 100%;
-      height: 100vh;
-      height: 100dvh;
-
-      overflow: hidden;
-      background: var(--black);
+      padding: 46px 0 70px;
     }
 
-    /* Размытая копия ролика на весь экран */
-    .hero-video__bg {
+    /* Фон растянут на всю ширину экрана, по высоте — как секция */
+    .hero::before {
+      content: "";
+
       position: absolute;
-      inset: 0;
-      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 50%;
 
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      transform: translateX(-50%);
 
-      object-fit: cover;
-
-      filter: blur(28px) brightness(0.55);
-      transform: scale(1.1);
+      background: url("ФПС СКИ блок 2.svg") center / 100% 100% no-repeat;
 
       pointer-events: none;
     }
 
-    /* Основное видео — вписано целиком, по центру */
-    .hero-video__player {
+    .hero .container {
       position: relative;
       z-index: 2;
+    }
 
+    /* --- кнопки шапки --- */
+
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 64px;
+    }
+
+    .hero-nav a {
+      display: block;
+      transition: transform 0.22s ease;
+    }
+
+    .hero-nav a:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-nav img {
+      display: block;
+    }
+
+    /* красная кнопка: канвас 387×136 с тенью, кнопка 307×56 */
+    .hero-nav .nav-cta img {
+      height: 136px;
+      margin: -22px 0 -58px;
+    }
+
+    /* outline-кнопки: канвас равен высоте кнопки */
+    .hero-nav .nav-link img {
+      height: 56px;
+    }
+
+    /* --- сетка контента --- */
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 70px;
+      align-items: start;
+    }
+
+    .hero-title {
       display: block;
       width: 100%;
-      height: 100%;
+      max-width: 920px;
+      height: auto;
+    }
 
-      object-fit: contain;
-      object-position: center;
+    .hero-lead {
+      display: block;
+      width: 100%;
+      max-width: 780px;
+      height: auto;
+      margin-top: 26px;
+    }
+
+    /* --- пилюли с анимацией вылета --- */
+
+    .hero-pills {
+      margin-top: 44px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-pills__row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero-pills__row--center {
+      justify-content: center;
+    }
+
+    .hero-pill {
+      width: auto;
+      height: 90px;
+      margin: -16px 0 -24px;
+
+      opacity: 0;
+      animation:
+        pill-fly 0.85s cubic-bezier(0.2, 0.85, 0.3, 1.15) var(--d, 0s) forwards,
+        pill-float 5s ease-in-out calc(var(--d, 0s) + 1.4s) infinite;
+    }
+
+    @keyframes pill-fly {
+      0%   { opacity: 0; transform: translateY(90px) scale(0.85); filter: blur(8px); }
+      55%  { opacity: 1; }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes pill-float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-7px); }
+    }
+
+    /* --- плашка внизу слева --- */
+
+    .hero-note {
+      display: block;
+      width: auto;
+      height: 78px;
+      margin: 60px 0 -24px;
+    }
+
+    /* --- сертификат справа --- */
+
+    .hero-cert img {
+      display: block;
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      margin-left: auto;
     }
 
 
@@ -504,25 +604,25 @@
 
 
     /* =========================================================
-       УСЛОВИЯ ЭКЗАМЕНА — ГОРИЗОНТАЛЬНЫЕ КАРТОЧКИ
+       УСЛОВИЯ ЭКЗАМЕНА — ТРИ КАРТОЧКИ В ОДНУ СТРОКУ
        ========================================================= */
 
     .exam-conditions {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
     }
 
     .exam-condition {
       position: relative;
 
       display: grid;
-      grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr);
+      grid-template-columns: minmax(112px, 0.35fr) minmax(0, 1fr);
       align-items: center;
-      gap: 26px;
+      gap: 16px;
 
       min-height: 138px;
-      padding: 25px 30px 25px 34px;
+      padding: 24px 20px 24px 24px;
 
       overflow: hidden;
 
@@ -603,7 +703,7 @@
       flex-direction: column;
       justify-content: center;
 
-      padding-right: 24px;
+      padding-right: 14px;
       border-right: 1px solid #e6e6ea;
     }
 
@@ -623,7 +723,7 @@
       margin: 0;
 
       color: var(--text);
-      font-size: 19px;
+      font-size: 17px;
       line-height: 1.22;
     }
 
@@ -632,8 +732,8 @@
       z-index: 2;
 
       color: var(--gray);
-      font-size: 15px;
-      line-height: 1.63;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .exam-note {
@@ -1454,9 +1554,17 @@
       }
 
       .exam-condition {
-        grid-template-columns: minmax(145px, 0.38fr) minmax(0, 1fr);
-        gap: 22px;
-        padding-right: 25px;
+        grid-template-columns: minmax(98px, 0.36fr) minmax(0, 1fr);
+        gap: 12px;
+        padding: 20px 16px 20px 20px;
+      }
+
+      .exam-condition h3 {
+        font-size: 16px;
+      }
+
+      .exam-condition p {
+        font-size: 13.5px;
       }
     }
 
@@ -1482,16 +1590,40 @@
       .audience-card {
         min-height: auto;
       }
+
+      /* условия экзамена — в одну колонку */
+      .exam-conditions {
+        grid-template-columns: 1fr;
+      }
+
+      .exam-condition {
+        grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr);
+        gap: 22px;
+        padding: 25px 30px 25px 34px;
+      }
+
+      .exam-condition h3 {
+        font-size: 19px;
+      }
+
+      .exam-condition p {
+        font-size: 15px;
+      }
+
+      /* hero — в одну колонку */
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 44px;
+      }
+
+      .hero-cert img {
+        margin: 0 auto;
+      }
     }
 
     @media (max-width: 900px) {
       section {
         padding: 40px 0;
-      }
-
-      /* Видео-секция не должна получать отступы */
-      section.hero-video {
-        padding: 0;
       }
 
       .container {
@@ -1541,10 +1673,6 @@
 
       section {
         padding: 36px 0;
-      }
-
-      section.hero-video {
-        padding: 0;
       }
 
       h1 {
@@ -1633,6 +1761,39 @@
       .accordion__body {
         padding: 0 18px 20px;
         font-size: 15px;
+      }
+
+      /* hero на мобильных */
+      .hero {
+        padding: 30px 0 50px;
+      }
+
+      .hero-nav {
+        gap: 12px;
+        margin-bottom: 40px;
+      }
+
+      .hero-nav .nav-cta img {
+        height: 110px;
+        margin: -18px 0 -46px;
+      }
+
+      .hero-nav .nav-link img {
+        height: 48px;
+      }
+
+      .hero-pill {
+        height: 72px;
+        margin: -13px 0 -19px;
+      }
+
+      .hero-pills__row--center {
+        justify-content: flex-start;
+      }
+
+      .hero-note {
+        height: 62px;
+        margin-top: 40px;
       }
     }
 
@@ -1759,36 +1920,57 @@
   <main>
 
     <!-- =====================================================
-         ВИДЕО-ОБЛОЖКА
+         БЛОК 1 — HERO: кнопки, заголовок, пилюли, сертификат
          ===================================================== -->
 
-    <section class="hero-video">
+    <section class="hero">
+      <div class="container">
 
-      <!-- Размытая подложка — закрывает поля по бокам -->
-      <video
-        class="hero-video__bg"
-        src="ФПС СКИ 1 блок.mp4"
-        autoplay
-        muted
-        playsinline
-        preload="auto"
-        aria-hidden="true"
-        tabindex="-1"
-      ></video>
+        <nav class="hero-nav">
+          <a class="nav-cta" href="#register">
+            <img src="Link.svg" alt="Записаться на экзамен">
+          </a>
+          <a class="nav-link" href="#demo">
+            <img src="Link (1).svg" alt="Пройти бесплатный демо-тест">
+          </a>
+          <a class="nav-link" href="#about">
+            <img src="Link (2).svg" alt="Всё об экзамене">
+          </a>
+          <a class="nav-link" href="#faq">
+            <img src="Link (3).svg" alt="FAQ">
+          </a>
+        </nav>
 
-      <!-- Основное видео — целиком, без обрезки -->
-      <video
-        class="hero-video__player"
-        id="heroVideo"
-        src="ФПС СКИ 1 блок.mp4"
-        autoplay
-        muted
-        playsinline
-        preload="auto"
-      >
-        Ваш браузер не поддерживает воспроизведение видео.
-      </video>
+        <div class="hero-grid">
 
+          <div class="hero-copy">
+            <img class="hero-title" src="Станьте.svg"
+              alt="Станьте квалифицированным инвестором — подтвердите знания официальным экзаменом">
+
+            <img class="hero-lead" src="Инвестор.svg"
+              alt="Инвестор, обладающий действующим сертификатом, вправе предъявить его брокеру или управляющей компании в качестве самостоятельного основания для признания квалифицированным инвестором — без необходимости подтверждать имущественный, доходный или иные критерии.">
+
+            <!-- Пилюли вылетают по очереди: задержка через --d -->
+            <div class="hero-pills">
+              <div class="hero-pills__row">
+                <img class="hero-pill" style="--d:.15s" src="Overlay+Border+Shadow.svg" alt="Юридическая сила">
+                <img class="hero-pill" style="--d:.40s" src="Overlay+Border+Shadow (1).svg" alt="Без ценза по доходу и активам">
+              </div>
+              <div class="hero-pills__row hero-pills__row--center">
+                <img class="hero-pill" style="--d:.65s" src="Overlay+Border+Shadow (2).svg" alt="Признаётся любым брокером">
+              </div>
+            </div>
+
+            <img class="hero-note" src="Container.svg"
+              alt="Сертификат становится доступен в личном кабинете в течение 7 дней после успешной сдачи">
+          </div>
+
+          <div class="hero-cert">
+            <img src="Бланк сертификата 2.svg" alt="Бланк сертификата квалифицированного инвестора">
+          </div>
+
+        </div>
+      </div>
     </section>
 
 
@@ -1796,7 +1978,7 @@
          ВСЁ ОБ ЭКЗАМЕНЕ
          ===================================================== -->
 
-    <section class="section-light">
+    <section class="section-light" id="about">
       <div class="container">
 
         <div class="section-heading reveal">
@@ -1824,9 +2006,7 @@
             <span class="exam-chip__line"></span>
             <span class="exam-chip__line exam-chip__line--2"></span>
             <span class="exam-chip__value">Формат экзамена</span>
-            <span class="exam-chip__label">
-              очно и дистанционно
-            </span>
+            <span class="exam-chip__label">очно и дистанционно</span>
           </div>
 
           <div class="exam-chip">
@@ -1864,8 +2044,6 @@
             </p>
           </article>
 
-          
-
           <article class="exam-condition reveal">
             <div class="exam-condition__heading">
               <h3>Параметры экзамена</h3>
@@ -1873,7 +2051,7 @@
 
             <p>
               50 вопросов, 60 минут на прохождение.
-              База вопросов, разработанных и
+              База из 500 вопросов, разработанных и
               верифицированных экспертами, прошедших
               независимую экспертизу.
             </p>
@@ -2021,9 +2199,7 @@
                     официального экзамена.
                   </p>
 
-                  <a href="#">
-                    Получить материалы для подготовки →
-                  </a>
+                  <a href="#">Получить материалы для подготовки →</a>
                 </div>
               </article>
 
@@ -2353,7 +2529,7 @@
          FAQ
          ===================================================== -->
 
-    <section class="section-light">
+    <section class="section-light" id="faq">
       <div class="container faq-layout">
 
         <div class="faq-intro reveal">
@@ -2515,53 +2691,6 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
 
-      /* =====================================================
-         Видео-обложка: один раз до конца, без повтора
-         ===================================================== */
-
-      const heroVideo = document.getElementById("heroVideo");
-      const heroBg = document.querySelector(".hero-video__bg");
-
-      if (heroVideo) {
-        heroVideo.loop = false;
-
-        if (heroBg) {
-          heroBg.loop = false;
-        }
-
-        // В конце — останавливаем оба слоя на последнем кадре
-        heroVideo.addEventListener("ended", function () {
-          heroVideo.pause();
-          heroVideo.currentTime = heroVideo.duration;
-
-          if (heroBg) {
-            heroBg.pause();
-            heroBg.currentTime = heroBg.duration;
-          }
-        });
-
-        // Держим подложку синхронно с основным видео
-        heroVideo.addEventListener("play", function () {
-          if (heroBg && heroBg.paused) {
-            heroBg.currentTime = heroVideo.currentTime;
-            heroBg.play().catch(function () {});
-          }
-        });
-
-        // Если браузер заблокировал автозапуск — старт по первому клику
-        heroVideo.play().catch(function () {
-          document.addEventListener(
-            "click",
-            function () {
-              heroVideo.play();
-              if (heroBg) heroBg.play();
-            },
-            { once: true }
-          );
-        });
-      }
-
-
       /* Плавная прокрутка */
 
       document
@@ -2622,7 +2751,7 @@
       }
 
 
-      /* Анимация колец */
+      /* Анимация колец результата */
 
       const demoSection = document.getElementById("demo");
       const resultRings = document.querySelectorAll(".result-ring");
