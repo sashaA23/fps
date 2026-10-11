@@ -361,12 +361,14 @@
 
     /* --- сетка: текст 846 слева, сертификат 373×527 справа --- */
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 846px) minmax(0, 1fr);
-      gap: 90px;
-      align-items: stretch;
-    }
+.hero-grid {
+  --gap-cert: 100px;   /* ← ВОТ ЭТО ЧИСЛО: отступ сертификата от текста
+                          (было ~33px визуально, стало втрое больше) */
+  display: grid;
+  grid-template-columns: minmax(0, 846px) minmax(373px, 1fr);
+  gap: var(--gap-cert);
+  align-items: stretch;
+}
 
     .hero-copy {
       display: flex;
@@ -462,10 +464,10 @@
     .hero-cert {
       position: relative;
       justify-self: end;
-      align-self: end;
+      align-self: start;
       width: 373px;
       height: 527px;
-      margin-top: 60px;
+      margin-top: calc(30px + var(--gap-cert));
 
       opacity: 0;
       animation: cert-in 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) 1.8s forwards;
