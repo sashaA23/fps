@@ -262,120 +262,121 @@
     }
 
 
-    /* =========================================================
-       БЛОК 1 — HERO (контейнер макета 1500×938, контент 1252)
-       ========================================================= */
+/* =========================================================
+   БЛОК 1 — HERO (строго по макету)
+   ========================================================= */
 
-    .hero {
-      position: relative;
-      padding: 85px 0 60px;
-      overflow: hidden;
+.hero {
+  position: relative;
+  padding: 85px 0 60px;
+  overflow: hidden;
 
-      background:
-        radial-gradient(
-          46% 76% at 101% -4%,
-          rgba(247, 100, 110, 0.85) 0%,
-          rgba(255, 178, 183, 0.65) 36%,
-          rgba(255, 233, 234, 0.42) 62%,
-          rgba(255, 255, 255, 0) 82%
-        ),
-        radial-gradient(
-          46% 76% at -1% 64%,
-          rgba(255, 178, 183, 0.55) 0%,
-          rgba(255, 233, 234, 0.38) 46%,
-          rgba(255, 255, 255, 0) 76%
-        ),
-        var(--white);
-    }
-
-    .hero .container {
-      position: relative;
-      z-index: 2;
-
-      width: 100%;
-      max-width: 1292px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* ГЛАВНЫЙ ФИКС: глобальное img{max-width:100%} не должен
-       резать фиксированные размеры SVG в hero */
-    .hero-nav img,
-    .hero-pill,
-    .hero-note,
-    .hero-cert img {
-      max-width: none;
-    }
-
-    /* --- кнопки: 1252 суммарно, gap 40, размеры 1:1 --- */
-
-    .hero-nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 60px;
-    }
-
-    .hero-nav a {
-      display: block;
-      flex: 0 0 auto;
-      opacity: 0;
-      animation: nav-in 0.45s ease calc(2.4s + var(--i, 0) * 0.08s) forwards;
-    }
-
-    .hero-nav img {
-      display: block;
-    }
-
-    /* канвас 387×136 с тенью → кнопка ровно 307×56 */
-    .hero-nav .nav-cta img {
-      width: 387px;
-      height: 136px;
-      margin: -22px -40px -58px -40px;
-    }
-
-    /* outline-кнопки: канвас = размер кнопки */
-    .hero-nav .nav-link img {
-      height: 56px;
-    }
-
-    @keyframes nav-in {
-      from { opacity: 0; transform: translateY(-12px); }
-      to   { opacity: 1; transform: none; }
-    }
-
-    /* --- заголовок: 55 / 60 / -2.45, на всю ширину --- */
-
-    .hero-title {
-      max-width: 1252px;
-      margin-bottom: 34px;
-
-      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-      font-size: 55px;
-      line-height: 60px;
-      font-weight: 700;
-      letter-spacing: -2.45px;
-    }
-
-    /* --- сетка: текст 846 слева, сертификат 373×527 справа --- */
-
-.hero-grid {
-  --gap-cert: 100px;   /* ← ВОТ ЭТО ЧИСЛО: отступ сертификата от текста
-                          (было ~33px визуально, стало втрое больше) */
-  display: grid;
-  grid-template-columns: minmax(0, 846px) minmax(373px, 1fr);
-  gap: var(--gap-cert);
-  align-items: stretch;
+  background:
+    radial-gradient(
+      46% 76% at 101% -4%,
+      rgba(247, 100, 110, 0.85) 0%,
+      rgba(255, 178, 183, 0.65) 36%,
+      rgba(255, 233, 234, 0.42) 62%,
+      rgba(255, 255, 255, 0) 82%
+    ),
+    radial-gradient(
+      46% 76% at -1% 64%,
+      rgba(255, 178, 183, 0.55) 0%,
+      rgba(255, 233, 234, 0.38) 46%,
+      rgba(255, 255, 255, 0) 76%
+    ),
+    var(--white);
 }
 
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-    }
+.hero .container {
+  position: relative;
+  z-index: 2;
 
-    /* --- абзац: 24 / 30, justify, #000, ширина 846 --- */
+  width: 100%;
+  max-width: 1292px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Отключаем глобальный max-width для hero-картинок */
+.hero-nav img,
+.hero-pill,
+.hero-note,
+.hero-cert img {
+  max-width: none;
+}
+
+/* --- Навигация: 4 кнопки, gap 40px --- */
+
+.hero-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.hero-nav a {
+  display: block;
+  flex: 0 0 auto;
+  opacity: 0;
+  animation: nav-in 0.45s ease calc(2.4s + var(--i, 0) * 0.08s) forwards;
+}
+
+.hero-nav a:hover {
+  transform: translateY(-3px);
+}
+
+.hero-nav img {
+  display: block;
+}
+
+/* Красная кнопка: канвас 387×136, кнопка 307×56 */
+.hero-nav .nav-cta img {
+  width: 387px;
+  height: 136px;
+  margin: -22px -40px -58px -40px;
+}
+
+/* Outline-кнопки: канвас = размер кнопки */
+.hero-nav .nav-link img {
+  height: 56px;
+}
+
+@keyframes nav-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --- Заголовок: 55px / 60px line-height / -2.45px letter-spacing --- */
+
+.hero-title {
+  max-width: 1252px;
+  margin-bottom: 34px;
+
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  font-size: 55px;
+  line-height: 60px;
+  font-weight: 700;
+  letter-spacing: -2.45px;
+}
+
+/* --- Сетка: текст слева, сертификат справа --- */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 846px) minmax(0, 373px);
+  gap: 33px;
+  align-items: start;
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Абзац: 24px / 30px / justify / 846px --- */
 
 .hero-lead {
   width: 846px;
@@ -391,7 +392,6 @@
   text-align-last: left;
 }
 
-/* ЖЕЛЕЗОБЕТОННЫЙ ФИКС: последняя строка не растягивается */
 .hero-lead::after {
   content: "";
   display: inline-block;
@@ -399,110 +399,204 @@
   height: 0;
 }
 
-    /* --- пилюли: блок 724×155, padding 20, gap 15 --- */
+/* --- Пилюли: 319×90, 462×90, 451×90 --- */
 
-    .hero-pills {
-      width: 724px;
-      max-width: 100%;
-      padding: 20px 0;
-      margin-top: 40px;
+.hero-pills {
+  width: 724px;
+  max-width: 100%;
+  padding: 20px 0;
+  margin-top: 40px;
 
-      display: grid;
-      gap: 15px;
-    }
+  display: grid;
+  gap: 15px;
+}
 
-    .hero-pills__row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+.hero-pills__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
 
-    .hero-pills__row--center { justify-content: center; }
+.hero-pills__row--center {
+  justify-content: center;
+}
 
-    /* канвас пилюли с тенью → пилюля 50px в раскладке */
-    .hero-pill {
-      width: auto;
-      height: 90px;
-      margin: -16px -18px -24px -18px;
+/* Компенсация теней в канвасах пилюль */
+.hero-pill {
+  width: auto;
+  height: 90px;
+  margin: -16px -18px -24px -18px;
 
-      opacity: 0;
-      animation:
-        pill-fly 0.6s cubic-bezier(0.2, 0.85, 0.3, 1.15) var(--d, 0s) forwards,
-        pill-float 5s ease-in-out calc(var(--d, 0s) + 2s) infinite;
-    }
+  opacity: 0;
+  animation:
+    pill-fly 0.6s cubic-bezier(0.2, 0.85, 0.3, 1.15) var(--d, 0s) forwards,
+    pill-float 5s ease-in-out calc(var(--d, 0s) + 2s) infinite;
+}
 
-    @keyframes pill-fly {
-      0%   { opacity: 0; transform: translateY(80px) scale(0.88); filter: blur(8px); }
-      55%  { opacity: 1; }
-      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-    }
+@keyframes pill-fly {
+  0%   { opacity: 0; transform: translateY(80px) scale(0.88); filter: blur(8px); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
 
-    @keyframes pill-float {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-6px); }
-    }
+@keyframes pill-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
 
-    /* --- плашка 776×38: низ = низ сертификата --- */
+/* --- Сертификат: 373×527 --- */
 
-    .hero-note {
-      align-self: flex-start;
-      width: auto;
-      height: 78px;
-      margin: 50px -18px -24px -18px;
+.hero-cert {
+  position: relative;
+  justify-self: end;
+  align-self: start;
+  width: 373px;
+  height: 527px;
+  margin-top: 30px;
 
-      opacity: 0;
-      animation: note-in 0.5s ease 2.7s forwards;
-    }
+  opacity: 0;
+  animation: cert-in 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) 1.8s forwards;
+}
 
-    @keyframes note-in {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: none; }
-    }
+.hero-cert img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 156%;
+  height: 156%;
+  transform: translate(-50%, -50%);
 
-    /* --- сертификат: бокс = бланк 373×527, канвас с полями внутри --- */
+  filter: drop-shadow(0 18px 40px rgba(240, 34, 45, 0.22));
+}
 
-    .hero-cert {
-      position: relative;
-      justify-self: end;
-      align-self: start;
-      width: 373px;
-      height: 527px;
-      margin-top: calc(30px + var(--gap-cert));
+@keyframes cert-in {
+  0%   { opacity: 0; transform: translateX(70px) scale(1.05); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
 
-      opacity: 0;
-      animation: cert-in 0.7s cubic-bezier(0.2, 0.8, 0.25, 1) 1.8s forwards;
-    }
+/* --- Плашка: 816×78 --- */
 
-    .hero-cert img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 156%;
-      height: 156%;
-      transform: translate(-50%, -50%);
+.hero-note {
+  display: block;
+  width: auto;
+  height: 78px;
+  margin: 50px -18px -24px -18px;
 
-      filter: drop-shadow(0 18px 40px rgba(240, 34, 45, 0.22));
-    }
+  opacity: 0;
+  animation: note-in 0.5s ease 2.7s forwards;
+}
 
-    @keyframes cert-in {
-      0%   { opacity: 0; transform: translateX(70px) scale(1.05); }
-      60%  { opacity: 1; }
-      100% { opacity: 1; transform: none; }
-    }
+@keyframes note-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
 
-    /* --- вылет слов --- */
+/* --- Вылет слов --- */
 
-    .w {
-      display: inline-block;
-      opacity: 0;
-      transform: translate(0.5em, 0.35em);
-      animation: word-in 0.45s cubic-bezier(0.22, 0.85, 0.3, 1) forwards;
-      animation-delay: calc(var(--base, 0s) + var(--i) * var(--step, 45ms));
-    }
+.w {
+  display: inline-block;
+  opacity: 0;
+  transform: translate(0.5em, 0.35em);
+  animation: word-in 0.45s cubic-bezier(0.22, 0.85, 0.3, 1) forwards;
+  animation-delay: calc(var(--base, 0s) + var(--i) * var(--step, 45ms));
+}
 
-    @keyframes word-in {
-      to { opacity: 1; transform: none; }
-    }
+@keyframes word-in {
+  to { opacity: 1; transform: none; }
+}
+
+/* --- Адаптив --- */
+
+@media (max-width: 1050px) {
+  .hero {
+    padding: 50px 0 40px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-cert {
+    justify-self: center;
+    margin-top: 10px;
+  }
+
+  .hero-note {
+    margin: 40px -18px -24px -18px;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 30px 0 30px;
+  }
+
+  .hero-nav {
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .hero-nav .nav-cta img {
+    width: 312px;
+    height: 110px;
+    margin: -18px -32px -46px -32px;
+  }
+
+  .hero-nav .nav-link img {
+    height: 48px;
+  }
+
+  .hero-title {
+    font-size: 34px;
+    line-height: 40px;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+
+  .hero-lead {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: left;
+  }
+
+  .hero-pills {
+    margin-top: 24px;
+  }
+
+  .hero-pill {
+    height: 72px;
+    margin: -13px -14px -19px -14px;
+  }
+
+  .hero-pills__row--center {
+    justify-content: flex-start;
+  }
+
+  .hero-cert {
+    justify-self: center;
+    width: 100%;
+    max-width: 373px;
+    height: auto;
+    aspect-ratio: 373 / 527;
+  }
+
+  .hero-note {
+    height: 62px;
+    margin: 30px -14px -20px -14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .w,
+  .hero-pill,
+  .hero-cert,
+  .hero-note,
+  .hero-nav a {
+    animation-delay: 0ms !important;
+  }
+}
 
 
     /* =========================================================
@@ -2098,62 +2192,63 @@
          БЛОК 1 — HERO
          ===================================================== -->
 
-    <section class="hero">
-      <div class="container">
+<section class="hero">
+  <div class="container">
 
-        <nav class="hero-nav">
-          <a class="nav-cta" href="#register" style="--i:0">
-            <img src="Link.svg" alt="Записаться на экзамен">
-          </a>
-          <a class="nav-link" href="#demo" style="--i:1">
-            <img src="Link (1).svg" alt="Пройти бесплатный демо-тест">
-          </a>
-          <a class="nav-link" href="#about" style="--i:2">
-            <img src="Link (2).svg" alt="Всё об экзамене">
-          </a>
-          <a class="nav-link" href="#faq" style="--i:3">
-            <img src="Link (3).svg" alt="FAQ">
-          </a>
-        </nav>
+    <nav class="hero-nav">
+      <a class="nav-cta" href="#register" style="--i:0">
+        <img src="Link.svg" alt="Записаться на экзамен">
+      </a>
+      <a class="nav-link" href="#demo" style="--i:1">
+        <img src="Link (1).svg" alt="Пройти бесплатный демо-тест">
+      </a>
+      <a class="nav-link" href="#about" style="--i:2">
+        <img src="Link (2).svg" alt="Всё об экзамене">
+      </a>
+      <a class="nav-link" href="#faq" style="--i:3">
+        <img src="Link (3).svg" alt="FAQ">
+      </a>
+    </nav>
 
-        <h1 class="hero-title" data-words style="--base:.1s; --step:45ms">
-          Станьте <span class="accent">квалифицированным инвестором</span> —
-          подтвердите знания официальным экзаменом
-        </h1>
+    <h1 class="hero-title" data-words style="--base:.1s; --step:45ms">
+      Станьте <span class="accent">квалифицированным инвестором</span> —
+      подтвердите знания официальным экзаменом
+    </h1>
 
-        <div class="hero-grid">
+    <div class="hero-grid">
 
-          <div class="hero-copy">
-            <p class="hero-lead" data-words style="--base:.9s; --step:10ms">
-              Инвестор, обладающий действующим сертификатом, вправе
-              предъявить его брокеру или управляющей компании
-              в качестве самостоятельного основания для признания
-              квалифицированным инвестором — без необходимости
-              подтверждать имущественный, доходный или иные
-              критерии.
-            </p>
+      <div class="hero-copy">
+        <p class="hero-lead" data-words style="--base:.9s; --step:10ms">
+          Инвестор, обладающий действующим сертификатом, вправе
+          предъявить его брокеру или управляющей компании
+          в качестве самостоятельного основания для признания
+          квалифицированным инвестором — без необходимости
+          подтверждать имущественный, доходный или иные
+          критерии.
+        </p>
 
-            <div class="hero-pills">
-              <div class="hero-pills__row">
-                <img class="hero-pill" style="--d:1.6s" src="Overlay+Border+Shadow.svg" alt="Юридическая сила">
-                <img class="hero-pill" style="--d:1.75s" src="Overlay+Border+Shadow (1).svg" alt="Без ценза по доходу и активам">
-              </div>
-              <div class="hero-pills__row hero-pills__row--center">
-                <img class="hero-pill" style="--d:1.9s" src="Overlay+Border+Shadow (2).svg" alt="Признаётся любым брокером">
-              </div>
-            </div>
-
-            <img class="hero-note" src="Container.svg"
-              alt="Сертификат становится доступен в личном кабинете в течение 7 дней после успешной сдачи">
+        <div class="hero-pills">
+          <div class="hero-pills__row">
+            <img class="hero-pill" style="--d:1.6s" src="Overlay+Border+Shadow.svg" alt="Юридическая сила">
+            <img class="hero-pill" style="--d:1.75s" src="Overlay+Border+Shadow (1).svg" alt="Без ценза по доходу и активам">
           </div>
-
-          <div class="hero-cert">
-            <img src="Бланк сертификата 2.svg" alt="Бланк сертификата квалифицированного инвестора">
+          <div class="hero-pills__row hero-pills__row--center">
+            <img class="hero-pill" style="--d:1.9s" src="Overlay+Border+Shadow (2).svg" alt="Признаётся любым брокером">
           </div>
-
         </div>
       </div>
-    </section>
+
+      <div class="hero-cert">
+        <img src="Бланк сертификата 2.svg" alt="Бланк сертификата квалифицированного инвестора">
+      </div>
+
+    </div>
+
+    <img class="hero-note" src="Container.svg"
+      alt="Сертификат становится доступен в личном кабинете в течение 7 дней после успешной сдачи">
+
+  </div>
+</section>
 
 
     <!-- =====================================================
